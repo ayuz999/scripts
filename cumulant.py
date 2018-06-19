@@ -32,6 +32,8 @@ class calcCumulant:
             if binEntries == 0:
                 continue
             m1 = self.profileList[0].GetBinContent(i)
+            if m1 == 0:
+                continue
             m2 = self.profileList[1].GetBinContent(i)
             m3 = self.profileList[2].GetBinContent(i)
             m4 = self.profileList[3].GetBinContent(i)

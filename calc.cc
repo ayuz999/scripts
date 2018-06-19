@@ -14,7 +14,7 @@ using namespace std;
 void calc()
 {
 
-    ifstream input("test.list");//.19.6.ful");
+    ifstream input("file.list");//.19.6.ful");
     string line;
     vector<string> InputList;
     while(input >> line) {
@@ -111,9 +111,9 @@ void calc()
                 float ay=fabs(y);
 
                 //refmult2,3,4
-                if( aeta > 0.5 && aeta < 2 && (charge != 0) ) refmult2++;
-                if( aeta < 1 && (apid == 211 || apid == 321) ) refmult3++;
-                if( aeta < 1 && (apid == 2212 || apid == 211) ) refmult4++;
+                if( aeta > 0.5 && aeta < 2.0 && (charge != 0) ) refmult2++;
+                if( aeta < 1.0 && (apid == 211 || apid == 321) ) refmult3++;
+                if( aeta < 1.0 && (apid == 2212 || apid == 211) ) refmult4++;
 
                 if(apid == 2212)
                     dndy_netproton->Fill(y, charge *10);
@@ -122,32 +122,33 @@ void calc()
                 if( charge != 0)
                     dndeta_netcharge->Fill(eta, charge *10);
 
-                if( apid == 2212 && pt > 0.4 && pt < 2 ) {
-                    if(ay < 2)
+                if( apid == 2212 && pt >= 0.4 && pt <= 2 ) {
+                    if(ay < 2.0)
                         for(double i=2; ay < i; i-=0.1){
-                            netproton[int(ceil(i*10))-1] += (charge > 0 ? 1 : -1);
+                            netproton[int(ceil(i*10))-1] += charge;
                         }
                 }
                 /////////////
 
-                if( apid == 321 && pt > 0.2 && pt < 1.6 ) 
+                if( apid == 321 && pt >= 0.2 && pt <= 1.6 ) 
                 {
-                    if(ay < 2)
+                    if(ay < 2.0)
                         for(double i=2; ay < i; i-=0.1){
-                            netkaon[int(ceil(i*10))-1] += (charge > 0 ? 1 : -1);
+                            netkaon[int(ceil(i*10))-1] += charge;
                         }
                 }
                 ////////////////////
-                if( (apid == 2212 || apid == 211 || apid == 321 ) && pt > 0.2 && pt < 2 ) {
+                if( charge!=0 && pt >= 0.2 && pt <= 2 ) {
                     if(aeta < 0.5)
                         for(double i=0.5; aeta < i; i-=0.025){
-                            netcharge[int(ceil(i*40))-1] += (charge > 0 ? 1 : -1);
+                            netcharge[int(ceil(i*40))-1] += charge;
                         }
                 }
 
+            //    if(apid == 321 ) cout<<"eta "<<eta<<" ";
+
             }
             // track loop ends
-            
             // fill refmult2,3,4 histograms
             refMult2->Fill(refmult2);
             refMult3->Fill(refmult3);
@@ -173,12 +174,7 @@ void calc()
                     NETQ = NETQ * netcharge[i];
                 }
             }
-
-
-
-
         } //event loop ends
-
     }// root file loop ends
 
     output->cd();
@@ -188,7 +184,6 @@ void calc()
 
 int main()
 {
-
     calc();
     return 0;
 }
