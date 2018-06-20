@@ -154,9 +154,9 @@ void calc()
             refMult3->Fill(refmult3);
             refMult4->Fill(refmult4);
 
-            Net_Proton_Dist->Fill(netproton[15]); //|y|<0.5
-            Net_Kaon_Dist->Fill(netkaon[15]);        //|y|<0.5
-            Net_Charge_Dist->Fill(netcharge[0]);    //|eta|<0.5
+            Net_Proton_Dist->Fill(netproton[4]); //|y|<0.5
+            Net_Kaon_Dist->Fill(netkaon[4]);        //|y|<0.5
+            Net_Charge_Dist->Fill(netcharge[19]);    //|eta|<0.5
 
 
             for(int i=0; i<20; i++) {
