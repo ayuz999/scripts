@@ -31,8 +31,6 @@ void calc()
     float pz[10000];
     int pid[10000];
     int mul=0;
-    int proton[20], kaon[20], charge[20] = {0};// 20: abs(y) range(0.1:2) *10  20 : abs(eta) range(0.025:0.5) *40
-    int aproton[20], akaon[20], ncharge[20] = {0};
     int netproton[20], netkaon[20], netcharge[20] = {0};
     int refmult2, refmult3, refmult4=0;
     float mass=0;
@@ -85,12 +83,6 @@ void calc()
             //track loop
             refmult2=refmult3=refmult4=0;
             for(int i=0; i<20; i++) {
-                proton[i]=0;
-                aproton[i]=0;
-                kaon[i]=0;
-                akaon[i]=0;
-                charge[i]=0;
-                ncharge[i]=0;
                 netcharge[i]=0;
                 netkaon[i]=0;
                 netproton[i]=0;
